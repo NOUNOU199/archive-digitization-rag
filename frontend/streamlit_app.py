@@ -31,8 +31,8 @@ def render_upload_page() -> None:
             files = {"file": (uploaded.name, uploaded.getvalue(), uploaded.type or "application/octet-stream")}
             upload_response = api_post("/upload", files=files).json()
             document_id = upload_response["document_id"]
-            with st.spinner("Running OCR, layout analysis, metadata extraction, embeddings, and indexing..."):
-                process_response = api_post("/process", json={"document_id": document_id}).json()
+            with st.spinner("Running OCR, layout analysis, metadata extraction, and classification..."):
+                process_response = api_post("/process", json={"document_id": document_id, "ocr_only": True}).json()
             st.session_state["last_document"] = process_response
             st.success(f"Processed document #{document_id}")
         except requests.RequestException as exc:

@@ -86,6 +86,7 @@ class UploadResponse(BaseModel):
 
 class ProcessRequest(BaseModel):
     document_id: int
+    ocr_only: bool = False
 
 
 class ProcessResponse(BaseModel):

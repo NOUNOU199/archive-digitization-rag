@@ -19,4 +19,4 @@ def process_document(
     document = db.get(Document, request.document_id)
     if not document:
         raise HTTPException(status_code=404, detail="Document not found")
-    return pipeline.process_document(db, document)
+    return pipeline.process_document(db, document, index_embeddings=not request.ocr_only)
